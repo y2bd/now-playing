@@ -1,3 +1,3 @@
-A basic web UI for calculating the type weaknesses of your Pokemon team.
+A basic Reddit web client, meant to prioritize content discovery over idle browsing.
 
-This project was created as an example of the new React Hooks API.
+Made using React Hooks (https://reactjs.org/docs/hooks-overview.html).
