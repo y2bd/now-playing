@@ -55,7 +55,7 @@ export async function list(args: ListArgs): Promise<ListingCursor> {
     }
   });
 
-  const listResponse = JSON.parse(listResponseStr) as ListResponse;
+  const listResponse = JSON.parse(listResponseStr.slice(7, -1)) as ListResponse;
 
   return {
     data: listResponse.data.children.map(child => child.data),
@@ -73,7 +73,8 @@ function listUri({ subreddit, sort, after, count }: ListArgs) {
   const args = uriArgBuilder(
     ["limit", LIMIT],
     ifv("after", after),
-    ifv("count", count)
+    ifv("count", count),
+    ["jsonp", "jp"]
   );
 
   return `${base}${args}`;
