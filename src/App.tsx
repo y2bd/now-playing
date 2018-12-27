@@ -1,32 +1,54 @@
 import * as React from "react";
 import "./App.css";
+import Post from "./components/Post";
 import useCursor from "./hooks/useCursor";
-import { list } from "./reddit/listing";
+import { list, Sort } from "./reddit/listing";
+
+const subreddit = "frugalmalefashion";
+const sort: Sort = "hot";
 
 const App = () => {
-  const [posts, loadNextPosts] = useCursor(
+  const [posts, loadNextPosts, isLoading] = useCursor(
     () =>
       list({
-        sort: "hot",
-        subreddit: "mechanicalkeyboards"
+        sort,
+        subreddit
       }),
     {
       additive: true
     }
   );
 
+  const loadNext = React.useCallback(
+    (evt: React.MouseEvent) => {
+      console.log("Load next posts");
+      loadNextPosts();
+
+      evt.stopPropagation();
+      evt.preventDefault();
+    },
+    [loadNextPosts]
+  );
+
   if (posts.length <= 0) {
     return <p>Loading...</p>;
   } else {
     return (
-      <>
+      <div className="App">
+        <p className="Header">{`/r/${subreddit} • ${sort}`}</p>
         {posts.map(post => (
-          <article key={post.id}>
-            <h1>{post.title}</h1>
-          </article>
+          <Post {...post} />
         ))}
-        <button onClick={loadNextPosts}>Next...</button>
-      </>
+        {isLoading ? (
+          <a href="#" className="loading">
+            loading...
+          </a>
+        ) : (
+          <a href="#nextPosts" className="next" onClick={loadNext}>
+            next
+          </a>
+        )}
+      </div>
     );
   }
 };

@@ -3,5 +3,19 @@
   flex-direction: column;
   max-width: 1024px;
   margin: 0 auto;
-  padding: 32px;
+  padding: 16px;
+
+  font-size: 14px;
+  color: white;
+}
+
+a {
+  color: white;
+}
+
+.App a.next,
+.App a.loading {
+  text-align: right;
+
+  outline: none;
 }

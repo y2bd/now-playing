@@ -1,0 +1,49 @@
+.Post {
+  margin-bottom: 12px;
+  text-transform: lowercase;
+}
+
+.Post h1 {
+  margin: 0;
+  margin-bottom: 2px;
+
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.4em;
+}
+
+.Post.Open {
+  border-left: 2px #999 solid;
+  padding-left: 8px;
+  margin-left: -10px;
+  z-index: 1000;
+}
+
+.Post.Open p {
+  line-height: 1.4em;
+}
+
+.Post:hover h1,
+.Post:active h1,
+.Post:focus h1 {
+  color: #ccc;
+  cursor: pointer;
+}
+
+.Post .Domain,
+.Post .Date {
+  display: inline-block;
+  color: #999;
+  margin-right: 4px;
+}
+
+.Overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+
+  z-index: 999;
+}

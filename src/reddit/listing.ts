@@ -39,6 +39,7 @@ export interface ListingData {
   readonly pinned: boolean;
   readonly score: number;
   readonly selftext: string;
+  readonly selftext_html: string;
   readonly suggested_sort: string;
   readonly title: string;
   readonly url: string;
