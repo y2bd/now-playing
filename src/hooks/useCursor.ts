@@ -1,5 +1,5 @@
 import * as React from "react";
-import PromiseCursor, { PromiseCursorProvider } from "src/cursor";
+import PromiseCursor, { PromiseCursorProvider } from "../cursor";
 import useMount from "./useMount";
 
 export interface CursorOptions {
