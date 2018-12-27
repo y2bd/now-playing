@@ -7,7 +7,9 @@
     "gh-pages": "^2.0.1",
     "react": "16.7.0-alpha.2",
     "react-dom": "16.7.0-alpha.2",
-    "react-scripts-ts": "3.1.0"
+    "react-scripts-ts": "3.1.0",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.5"
   },
   "scripts": {
     "predeploy": "npm run build",
@@ -22,6 +24,8 @@
     "@types/node": "^10.12.9",
     "@types/react": "^16.7.6",
     "@types/react-dom": "^16.0.9",
+    "@types/request": "^2.48.1",
+    "@types/request-promise-native": "^1.0.15",
     "typescript": "^3.1.6"
   }
 }

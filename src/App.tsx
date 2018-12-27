@@ -1,37 +1,34 @@
-import * as React from 'react';
-import './App.css';
-import Selector from './Selector';
-import TeamWeakness from './TeamWeakness';
-
-type PokemonName = string | undefined;
-
-interface IPartySlot {
-  index: number;
-  pokemonName: PokemonName;
-  setPokemonName: React.Dispatch<React.SetStateAction<PokemonName>>;
-}
-
-// custom hook!
-const useSlot = (index: number): IPartySlot => {
-  const [pokemonName, setPokemonName] = React.useState<PokemonName>(undefined);
-  return { index, pokemonName, setPokemonName };
-}
-
-const range = [1, 2, 3, 4, 5, 6];
+import * as React from "react";
+import "./App.css";
+import useCursor from "./hooks/useCursor";
+import { list } from "./reddit/listing";
 
 const App = () => {
-  const slots = range.map(useSlot);
+  const [posts, loadNextPosts] = useCursor(
+    () =>
+      list({
+        sort: "hot",
+        subreddit: "mechanicalkeyboards"
+      }),
+    {
+      additive: true
+    }
+  );
 
-  return (
-    <div className='App'>
-      <div className='Selectors'>
-        {slots.map(slot => (
-          <Selector key={slot.index} index={slot.index} onSelect={slot.setPokemonName} />
+  if (posts.length <= 0) {
+    return <p>Loading...</p>;
+  } else {
+    return (
+      <>
+        {posts.map(post => (
+          <article key={post.id}>
+            <h1>{post.title}</h1>
+          </article>
         ))}
-      </div>
-      <TeamWeakness pokemonNames={slots.map(slot => slot.pokemonName)} />
-    </div>
-  )
-}
+        <button onClick={loadNextPosts}>Next...</button>
+      </>
+    );
+  }
+};
 
 export default App;
