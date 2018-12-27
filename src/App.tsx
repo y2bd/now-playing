@@ -7,12 +7,13 @@ import { list, Sort } from "./reddit/listing";
 const subreddit = "frugalmalefashion";
 const sort: Sort = "hot";
 
-const App = () => {
+const App = ({ token }: { token: string }) => {
   const [posts, loadNextPosts, isLoading] = useCursor(
     () =>
       list({
         sort,
-        subreddit
+        subreddit,
+        token
       }),
     {
       additive: true

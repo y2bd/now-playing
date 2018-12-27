@@ -11,6 +11,8 @@ export interface ListArgs {
 
   readonly after?: string;
   readonly count?: number;
+
+  readonly token: string;
 }
 
 export interface ListResponse {
@@ -51,11 +53,12 @@ export async function list(args: ListArgs): Promise<ListingCursor> {
   const uri = listUri(args);
   const listResponseStr = await r.get(uri, {
     headers: {
+      Authorization: "bearer " + args.token,
       "User-Agent": "addict:pc:v0.1 (by /u/y2bd)"
     }
   });
 
-  const listResponse = JSON.parse(listResponseStr.slice(7, -1)) as ListResponse;
+  const listResponse = JSON.parse(listResponseStr) as ListResponse;
 
   return {
     data: listResponse.data.children.map(child => child.data),
@@ -69,12 +72,11 @@ export async function list(args: ListArgs): Promise<ListingCursor> {
 }
 
 function listUri({ subreddit, sort, after, count }: ListArgs) {
-  const base = `https://www.reddit.com/r/${subreddit}/${sort}.json`;
+  const base = `https://oauth.reddit.com/r/${subreddit}/${sort}.json`;
   const args = uriArgBuilder(
     ["limit", LIMIT],
     ifv("after", after),
-    ifv("count", count),
-    ["jsonp", "jp"]
+    ifv("count", count)
   );
 
   return `${base}${args}`;
