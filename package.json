@@ -1,8 +1,8 @@
 {
-  "name": "lanette",
+  "name": "addit",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://y2bd.github.io/lanette",
+  "homepage": "https://y2bd.github.io/addict",
   "dependencies": {
     "gh-pages": "^2.0.1",
     "react": "16.7.0-alpha.2",
