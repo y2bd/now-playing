@@ -53,8 +53,7 @@ export async function list(args: ListArgs): Promise<ListingCursor> {
   const uri = listUri(args);
   const listResponseStr = await r.get(uri, {
     headers: {
-      Authorization: "bearer " + args.token,
-      "User-Agent": "addict:pc:v0.1 (by /u/y2bd)"
+      Authorization: "bearer " + args.token
     }
   });
 
@@ -71,8 +70,8 @@ export async function list(args: ListArgs): Promise<ListingCursor> {
   };
 }
 
-function listUri({ subreddit, sort, after, count }: ListArgs) {
-  const base = `https://oauth.reddit.com/r/${subreddit}/${sort}.json`;
+function listUri({ subreddit, sort, after, count, token }: ListArgs) {
+  const base = `https://oauth` + `.reddit.com/r/${subreddit}/${sort}.json`;
   const args = uriArgBuilder(
     ["limit", LIMIT],
     ifv("after", after),
