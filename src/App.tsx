@@ -2,18 +2,18 @@ import * as React from "react";
 import "./App.css";
 import Post from "./components/Post";
 import useCursor from "./hooks/useCursor";
-import { list, Sort } from "./reddit/listing";
+import { Sort } from "./reddit/listing";
+import { list } from "./server/listingProxy";
 
 const subreddit = "frugalmalefashion";
 const sort: Sort = "hot";
 
-const App = ({ token }: { token: string }) => {
+const App = () => {
   const [posts, loadNextPosts, isLoading] = useCursor(
     () =>
       list({
         sort,
-        subreddit,
-        token
+        subreddit
       }),
     {
       additive: true

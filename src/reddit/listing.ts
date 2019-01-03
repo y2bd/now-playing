@@ -1,5 +1,5 @@
 import * as r from "request-promise-native";
-import PromiseCursor from "src/cursor";
+import PromiseCursor from "../cursor";
 
 const LIMIT = 20;
 
@@ -11,8 +11,6 @@ export interface ListArgs {
 
   readonly after?: string;
   readonly count?: number;
-
-  readonly token: string;
 }
 
 export interface ListResponse {
@@ -50,14 +48,7 @@ export interface ListingData {
 export type ListingCursor = PromiseCursor<ListingData>;
 
 export async function list(args: ListArgs): Promise<ListingCursor> {
-  const uri = listUri(args);
-  const listResponseStr = await r.get(uri, {
-    headers: {
-      Authorization: "bearer " + args.token
-    }
-  });
-
-  const listResponse = JSON.parse(listResponseStr) as ListResponse;
+  const listResponse = await listRaw(args);
 
   return {
     data: listResponse.data.children.map(child => child.data),
@@ -70,8 +61,19 @@ export async function list(args: ListArgs): Promise<ListingCursor> {
   };
 }
 
-function listUri({ subreddit, sort, after, count, token }: ListArgs) {
-  const base = `https://oauth` + `.reddit.com/r/${subreddit}/${sort}.json`;
+export async function listRaw(args: ListArgs): Promise<ListResponse> {
+  const uri = listUri(args);
+  const listResponseStr = await r.get(uri, {
+    headers: {
+      "User-Agent": "addict/pc /u/y2bd v0.1"
+    }
+  });
+
+  return JSON.parse(listResponseStr);
+}
+
+function listUri({ subreddit, sort, after, count }: ListArgs) {
+  const base = `https://www` + `.reddit.com/r/${subreddit}/${sort}.json`;
   const args = uriArgBuilder(
     ["limit", LIMIT],
     ifv("after", after),
@@ -81,7 +83,7 @@ function listUri({ subreddit, sort, after, count, token }: ListArgs) {
   return `${base}${args}`;
 }
 
-function uriArgBuilder(
+export function uriArgBuilder(
   ...kwargs: Array<[string, string | number] | undefined>
 ) {
   return (kwargs as Array<[string, string]>) // cast since filter-undefined doesn't type-guard
@@ -90,6 +92,9 @@ function uriArgBuilder(
     .slice(0, -1);
 }
 
-function ifv<T>(key: string, value: T | undefined): [string, T] | undefined {
+export function ifv<T>(
+  key: string,
+  value: T | undefined
+): [string, T] | undefined {
   return value ? [key, value] : undefined;
 }

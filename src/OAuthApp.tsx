@@ -53,7 +53,7 @@ const OAuthApp = () => {
         }}
         render={renderReceiver}
       />
-      {token && <App token={token} />}
+      {token && <App />}
     </>
   );
 };
