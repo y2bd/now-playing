@@ -22,7 +22,6 @@ const App = () => {
 
   const loadNext = React.useCallback(
     (evt: React.MouseEvent) => {
-      console.log("Load next posts");
       loadNextPosts();
 
       evt.stopPropagation();
@@ -32,7 +31,7 @@ const App = () => {
   );
 
   if (posts.length <= 0) {
-    return <p>Loading...</p>;
+    return <p className="Loading">loading...</p>;
   } else {
     return (
       <div className="App">

@@ -6,21 +6,23 @@ const Post = React.memo((post: ListingData) => {
   const [opened, setOpened] = React.useState(false);
 
   const onClick = React.useCallback(
-    () => {
+    (evt: React.MouseEvent) => {
       if (post.is_self) {
+        evt.stopPropagation();
+        evt.preventDefault();
         setOpened(!opened);
-      } else {
-        window.open(post.url);
       }
     },
-    [opened, post.url]
+    [opened]
   );
 
   return (
     <>
       {opened && <div className="Overlay" onClick={onClick} />}
       <article key={post.id} className={"Post " + (opened ? "Open" : "")}>
-        <h1 onClick={onClick}>{post.title}</h1>
+        <a href={post.url} onClick={onClick}>
+          {post.title}
+        </a>
         {opened && (
           <div
             dangerouslySetInnerHTML={{ __html: htmlDecode(post.selftext_html) }}
