@@ -1,15 +1,12 @@
 {
-  "name": "addict",
+  "name": "now-playing",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://y2bd.github.io/addict",
+  "homepage": "https://y2bd.github.io/now-playing",
   "dependencies": {
     "gh-pages": "^2.0.1",
-    "koa": "^2.6.2",
-    "koa-router": "^7.4.0",
     "react": "16.7.0-alpha.2",
     "react-dom": "16.7.0-alpha.2",
-    "react-oauth-flow": "^1.2.0",
     "react-router-dom": "^4.3.1",
     "react-scripts-ts": "3.1.0",
     "request": "^2.88.0",
@@ -18,7 +15,6 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "serve": "tsc && node ./build/dist/server/app.js",
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
@@ -26,8 +22,6 @@
   },
   "devDependencies": {
     "@types/jest": "^23.3.9",
-    "@types/koa": "^2.0.48",
-    "@types/koa-router": "^7.0.36",
     "@types/node": "^10.12.9",
     "@types/react": "^16.7.6",
     "@types/react-dom": "^16.0.9",
