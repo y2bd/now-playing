@@ -1,25 +1,63 @@
 .App {
-  display: flex;
-  flex-direction: column;
-  max-width: 1024px;
+  color: #ddd;
+  font-family: Consolas, Menlo, monospace;
+  font-weight: 200;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  text-transform: lowercase;
+
+  max-width: 1700px;
   margin: 0 auto;
-  padding: 16px;
-
-  font-size: 14px;
-  color: white;
+  padding: 16px 0 0 16px;
 }
 
-a {
-  color: white;
+header {
+  display: flex;
+  flex-direction: row;
+
+  margin: 16px 0 32px;
 }
 
-.App a.next,
-.App a.loading {
-  text-align: right;
+header h1 {
+  margin: 0 16px 0 0;
+  padding: 0;
 
-  outline: none;
+  font-size: 32px;
 }
 
-.App .Loading {
-  color: white;
+header span {
+  font-size: 32px;
+  margin: 0 4px 0 0;
+
+  opacity: 0.3;
+  cursor: pointer;
+}
+
+header span.active {
+  opacity: 1;
+}
+
+.Records {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.Records .hide {
+  display: none;
+}
+
+@media only screen and (max-width: 600px) {
+  header {
+    flex-wrap: wrap;
+  
+    margin: 8px 0 16px;
+  }
+
+  header h1 {
+    width: 100%;
+
+    font-size: 24px;
+  }
 }

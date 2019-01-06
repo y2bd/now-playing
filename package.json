@@ -8,7 +8,7 @@
     "react": "16.7.0-alpha.2",
     "react-dom": "16.7.0-alpha.2",
     "react-router-dom": "^4.3.1",
-    "react-scripts-ts": "3.1.0",
+    "react-scripts-ts": "^4.0.8",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.5"
   },
@@ -29,5 +29,11 @@
     "@types/request": "^2.48.1",
     "@types/request-promise-native": "^1.0.15",
     "typescript": "^3.1.6"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

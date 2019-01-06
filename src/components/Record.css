@@ -1,0 +1,73 @@
+.Record {
+    width: 200px;
+    height: 200px;
+    margin: 0 16px 16px 0;
+
+    background: black;
+    box-sizing: border-box;
+
+    position: relative;
+
+    cursor: pointer;
+    user-select: none;
+}
+
+.Record.empty {
+    border: 1px #ddd dotted;
+}
+
+.Record img {
+    width: 200px;
+    height: 200px;
+
+    object-fit: cover;
+}
+
+.Record .Details {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding: 16px;
+
+    background: rgba(16, 16, 16, 0.75);
+}
+
+.Record .Details h1, .Record .Details h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+}
+
+.Record .Details h2 {
+    color: #aaa;
+}
+
+.Record .Details .emoji {
+    position: absolute;
+    bottom: 2px;
+    right: 8px;
+    color: white;
+    font-size: 32px;
+}
+
+@media only screen and (max-width: 600px) {
+    .Record {
+        width: 43.5vw;
+        height: 43.5vw;
+    }
+
+    .Record img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .Record .Details {
+        padding: 4px;
+    }
+
+    .Record .Details h1, .Record .Details h2 {
+        font-size: 16px;
+    }
+}
