@@ -18,5 +18,5 @@ export async function getRecords(): Promise<Record[]> {
             artist,
             date: new Date(Date.parse(date)),
             rating: Number(rating),
-        })).reverse();
+        }));
 }
