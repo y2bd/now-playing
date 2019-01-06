@@ -4,16 +4,20 @@
     margin: 0 16px 16px 0;
 
     background: black;
-    box-sizing: border-box;
 
     position: relative;
 
     cursor: pointer;
     user-select: none;
+
+    border: 1px solid #222;
+    border-radius: 4px;
+    overflow: hidden;
 }
 
 .Record.empty {
-    border: 1px #ddd dotted;
+    border: 1px solid #333;
+    background: #222;
 }
 
 .Record img {
@@ -54,8 +58,8 @@
 
 @media only screen and (max-width: 600px) {
     .Record {
-        width: 43.5vw;
-        height: 43.5vw;
+        width: 43vw;
+        height: 43vw;
     }
 
     .Record img {
@@ -69,5 +73,13 @@
 
     .Record .Details h1, .Record .Details h2 {
         font-size: 16px;
+    }
+
+    .Record .Details .emoji {
+        position: absolute;
+        bottom: 0px;
+        right: 4px;
+        color: white;
+        font-size: 32px;
     }
 }

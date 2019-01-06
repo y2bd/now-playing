@@ -1,6 +1,6 @@
 .App {
-  color: #ddd;
-  font-family: Consolas, Menlo, monospace;
+  color: #fff;
+  font-family: "Helvetica Neue", "Segoe UI", sans-serif;
   font-weight: 200;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -16,7 +16,7 @@ header {
   display: flex;
   flex-direction: row;
 
-  margin: 16px 0 32px;
+  margin: 16px 0 24px;
 }
 
 header h1 {
