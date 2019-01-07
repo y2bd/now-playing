@@ -6,7 +6,7 @@ import useToggle from './hooks/useToggle';
 import { getRecords } from './services/dropbox';
 
 const App = () => {
-  const [records, loading] = usePromise(() => getRecords(), [], []);
+  const [records] = usePromise(() => getRecords(), [], []);
 
   const [best, setBest] = useToggle();
   const [great, setGreat] = useToggle();
@@ -25,27 +25,23 @@ const App = () => {
       }));
   }, [best, great, good, fair, records]);
 
-  if (loading) {
-    return <p>loading...</p>;
-  } else {
-    return <div className='App'>
-      <header>
-        <h1>albums of 2019</h1>
-        <span className={best && 'active' || ''} onClick={setBest}>😍</span>
-        <span className={great && 'active' || ''} onClick={setGreat}>😊</span>
-        <span className={good && 'active' || ''} onClick={setGood}>🙂</span>
-        <span className={fair && 'active' || ''} onClick={setFair}>😐</span>
-      </header>
-      <div className='Records'>
-        {filteredRecords.map(record =>
-          <div key={record.artist + record.album} className={record.show ? 'show' : 'hide'}>
-            <Record
-              {...record}
-            />
-          </div>)}
-      </div>
-    </div>;
-  }
+  return <div className='App'>
+    <header>
+      <h1>albums of 2019</h1>
+      <span className={best && 'active' || ''} onClick={setBest}>😍</span>
+      <span className={great && 'active' || ''} onClick={setGreat}>😊</span>
+      <span className={good && 'active' || ''} onClick={setGood}>🙂</span>
+      <span className={fair && 'active' || ''} onClick={setFair}>😐</span>
+    </header>
+    <div className='Records'>
+      {filteredRecords.map(record =>
+        <div key={record.artist + record.album} className={record.show ? 'show' : 'hide'}>
+          <Record
+            {...record}
+          />
+        </div>)}
+    </div>
+  </div>;
 };
 
 export default App;
