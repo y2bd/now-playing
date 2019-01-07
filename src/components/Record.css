@@ -83,3 +83,10 @@
         font-size: 32px;
     }
 }
+
+@media only screen and (max-width: 369px) {
+    .Record {
+        width: 42.5vw;
+        height: 42.5vw;
+    }
+}
