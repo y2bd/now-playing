@@ -1,5 +1,5 @@
 import * as React from 'react';
-import usePromise from '../hooks/usePromise';
+import useLocalPromise from 'src/hooks/useLocalPromise';
 import useToggle from '../hooks/useToggle';
 import { Record } from '../services/dropbox';
 import { getAlbumArtUri } from '../services/lastfm';
@@ -7,7 +7,9 @@ import './Record.css';
 
 const RecordCompB = (record: Record) => {
     const { artist, album, rating } = record;
-    const [albumArtUri, loading] = usePromise(
+
+    const [albumArtUri, loading, error] = useLocalPromise(
+        encodeURIComponent(`${artist}_${album}`),
         () => getAlbumArtUri(record),
         undefined,
         [artist, album]
@@ -28,11 +30,11 @@ const RecordCompB = (record: Record) => {
         className={'Record' + (empty ? ' empty' : '')}
         onClick={setDetail}>
         {albumArtUri && <img src={albumArtUri} />}
-        {loading && <div className="Details">
+        {(loading && !albumArtUri) && <div className="Details">
             <h1>loading</h1>
             <h2>album art</h2>
         </div>}
-        {(detail || empty) && <div className="Details">
+        {(detail || empty || error) && <div className="Details">
             <h1>{artist}</h1>
             <h2>{album}</h2>
             <span className="emoji">{emoji}</span>

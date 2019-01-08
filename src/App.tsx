@@ -1,12 +1,12 @@
 import * as React from "react";
 import "./App.css";
 import Record from './components/Record';
-import usePromise from './hooks/usePromise';
+import useLocalPromise from './hooks/useLocalPromise';
 import useToggle from './hooks/useToggle';
 import { getRecords } from './services/dropbox';
 
 const App = () => {
-  const [records] = usePromise(() => getRecords(), [], []);
+  const [records] = useLocalPromise("records", () => getRecords(), [], []);
 
   const [best, setBest] = useToggle();
   const [great, setGreat] = useToggle();
