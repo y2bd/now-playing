@@ -16,7 +16,7 @@ const App = () => {
   const filteredRecords = React.useMemo(() => {
     return records.map(({ album, artist, date, rating }) =>
       ({
-        album, artist, date, rating, show:
+        album, artist, date: new Date(Date.parse(date as any) + 1000 * 60 * 60 * 9), rating, show:
           (!best && !great && !good && !fair) ||
           (best && rating >= 8.1) ||
           (great && rating >= 6.1 && rating < 8.1) ||
@@ -24,6 +24,18 @@ const App = () => {
           (fair && rating < 4.1)
       }));
   }, [best, great, good, fair, records]);
+
+  const groupedRecords = React.useMemo(() => {
+    return filteredRecords.reduce((acc, elem) => {
+      const month = elem.date.getMonth();
+      const monthName = elem.date.toLocaleString('en-us', { month: 'long' });
+      if (acc[month] === undefined) {
+        acc[month] = { [monthName]: [] };
+      }
+      acc[month][monthName].push(elem);
+      return acc;
+    }, [] as Array<{ [month: string]: typeof filteredRecords }>).reverse();
+  }, [filteredRecords]);
 
   return <div className='App'>
     <header>
@@ -33,14 +45,19 @@ const App = () => {
       <span className={good && 'active' || ''} onClick={setGood}>🙂</span>
       <span className={fair && 'active' || ''} onClick={setFair}>😐</span>
     </header>
-    <div className='Records'>
-      {filteredRecords.map(record =>
-        <div key={record.artist + record.album} className={record.show ? 'show' : 'hide'}>
-          <Record
-            {...record}
-          />
-        </div>)}
-    </div>
+    {groupedRecords.map(group => Object.keys(group).map(monthName => (
+      <>
+        <h2>{monthName} ({group[monthName].length})</h2>
+        <div className='Records'>
+          {group[monthName].map(record =>
+          <div key={record.artist + record.album} className={record.show ? 'show' : 'hide'}>
+            <Record
+              {...record}
+            />
+          </div>)}
+        </div>
+      </>
+    )))}
   </div>;
 };
 
