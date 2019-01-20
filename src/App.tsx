@@ -47,7 +47,7 @@ const App = () => {
     </header>
     {groupedRecords.map(group => Object.keys(group).map(monthName => (
       <>
-        <h2>{monthName} ({group[monthName].length})</h2>
+        <h2>{monthName} ({group[monthName].filter(record => record.show).length})</h2>
         <div className='Records'>
           {group[monthName].map(record =>
           <div key={record.artist + record.album} className={record.show ? 'show' : 'hide'}>
