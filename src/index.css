@@ -4,4 +4,8 @@ body {
   font-family: sans-serif;
 
   background: black;
+
+  /* trick to make scrollbar not take up space */
+  width: 100vw;
+  overflow-x: hidden;
 }
